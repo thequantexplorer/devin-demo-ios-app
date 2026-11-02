@@ -30,7 +30,7 @@ Paste this into the macOS session. Replace `<you>` with your GitHub user or org.
 ```text
 Build a habit tracker in https://github.com/<you>/devin-demo-ios-app, a small SwiftUI iPhone app. Read the README and the run-in-simulator skill in .agents/skills first.
 
-Follow the design skill in .agents/skills/design/SKILL.md. The result should look like a finished, polished product, not a default template.
+Follow the repo's design skill. The result should look like a finished, polished product.
 
 This needs Xcode, so work on macOS. If this session is not on macOS, start a macOS child session for the work.
 
