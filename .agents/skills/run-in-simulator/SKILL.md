@@ -1,9 +1,58 @@
 ---
 name: run-in-simulator
-description: Build, test and run the HabitTracker iPhone app in the iOS Simulator on a macOS machine.
+description: Create, build, test and run the HabitTracker iPhone app in the iOS Simulator on a macOS machine.
 ---
 
 This app needs macOS with Xcode. It does not build on Linux.
+
+## Create the project (only if there is no `HabitTracker.xcodeproj` yet)
+
+SwiftUI, iOS 17, an app target `HabitTracker` (sources in `HabitTracker/`) and a unit test target `HabitTrackerTests` (XCTest, in `HabitTrackerTests/`). Generate the Xcode project with XcodeGen and commit both `project.yml` and `HabitTracker.xcodeproj`:
+
+```sh
+brew install xcodegen
+xcodegen
+```
+
+```yaml
+name: HabitTracker
+options:
+  bundleIdPrefix: com.example
+  deploymentTarget:
+    iOS: "17.0"
+targets:
+  HabitTracker:
+    type: application
+    platform: iOS
+    sources: [HabitTracker]
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.HabitTracker
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_UILaunchScreen_Generation: YES
+        MARKETING_VERSION: "1.0"
+        CURRENT_PROJECT_VERSION: "1"
+        CODE_SIGNING_ALLOWED: NO
+  HabitTrackerTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources: [HabitTrackerTests]
+    dependencies:
+      - target: HabitTracker
+    settings:
+      base:
+        GENERATE_INFOPLIST_FILE: YES
+        CODE_SIGNING_ALLOWED: NO
+schemes:
+  HabitTracker:
+    build:
+      targets:
+        HabitTracker: all
+    test:
+      targets: [HabitTrackerTests]
+```
+
+Add a `.gitignore` with `build/`, `DerivedData/` and `xcuserdata/`.
 
 ## Pick a simulator
 
